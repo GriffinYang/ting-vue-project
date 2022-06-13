@@ -129,7 +129,7 @@ export default {
 <style scoped>
 .bottom-bar {
   position: fixed;
-  bottom: 0px;
+  bottom: -2px;
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -137,6 +137,7 @@ export default {
   height: 50px;
   border-top: 1px solid #d5d5d5;
   z-index: 999;
+  background-color: white;
 }
 img {
   height: 24px;

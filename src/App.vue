@@ -1,11 +1,22 @@
 <template>
   <top-bar></top-bar>
-  <text-content
-    v-for="user in users"
-    :key="user.avator"
-    :type="user.type"
-    :userAvator="user.userAvator"
-  ></text-content>
+  <div class="main-content">
+    <text-content
+      v-for="user in users"
+      :type="user.type"
+      :key="user.id"
+      :name="user.name"
+      :userAvator="user.avator"
+      :textContent="user.textContent"
+      :date="user.date"
+      :tag="user.tag"
+      :img="user.photo"
+      :liked="user.liked"
+      :retweeted="user.retweeted"
+      :shared="user.shared"
+      :comments="user.comments"
+    ></text-content>
+  </div>
   <bottom-bar></bottom-bar>
 </template>
 
@@ -19,9 +30,61 @@ export default {
     return {
       currentPage: 'main',
       users: {
-        users: {
+        user1: {
+          id: 1,
           type: 'Video games·',
-          userAvator: '../assets/images/MainPage_16.jpg',
+          avator: 'MainPage_16.jpg',
+          name: "Assasin's Creed",
+          textContent: 'Time to test your loyalty.',
+          tag: "Assasin'sCreed",
+          date: '5/19/22',
+          photo: 'MainPage_23.jpg',
+          liked: 999,
+          retweeted: 99,
+          shared: 999,
+          comments: 999,
+        },
+        user2: {
+          id: 2,
+          type: 'Video games',
+          avator: 'MainPage_16.jpg',
+          name: "Assasin's Creed",
+          textContent: 'Time to test your loyalty.',
+          tag: "Assasin'sCreed",
+          date: '5/19/22',
+          photo: 'MainPage_23.jpg',
+          liked: 999,
+          retweeted: 999,
+          shared: 999,
+          comments: 999,
+        },
+        user3: {
+          id: 2,
+          type: 'Video games',
+          avator: 'MainPage_16.jpg',
+          name: "Assasin's Creed",
+          textContent: 'Time to test your loyalty.',
+          tag: "Assasin'sCreed",
+          date: '5/19/22',
+          photo: 'MainPage_23.jpg',
+          liked: 999,
+          retweeted: 999,
+          shared: 999,
+          comments: 999,
+        },
+        user4: {
+          id: 2,
+          type: 'Video games',
+          avator: 'MainPage_16.jpg',
+          name: "Assasin's Creed",
+          textContent: 'Time to test your loyalty.',
+          tag: "Assasin'sCreed",
+          date: '5/19/22',
+          photo: 'MainPage_23.jpg',
+          liked: 999,
+          retweeted: 999,
+          shared: 999,
+          comments: 999,
         },
       },
     };
@@ -38,6 +101,7 @@ export default {
   },
   provide() {
     return {
+      Users: this.users,
       ChangePage: this.changeCurrent,
       CurrentPage: computed(() => this.currentPage),
     };
@@ -45,4 +109,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.main-content {
+  margin-top: 3.125rem;
+}
+</style>
