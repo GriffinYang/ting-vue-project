@@ -26,16 +26,34 @@
       <div class="img-content">
         <img :src="require(`@/assets/images/${img}`)" alt="" srcset="" />
       </div>
-      <function-bar></function-bar>
+      <div class="function-bar">
+        <div class="comments">
+          <img src="../assets/images/MainPage_25.jpg" alt="" />
+          <span>{{ comments }}</span>
+        </div>
+        <div class="retweet">
+          <img src="../assets/images/MainPage_27.jpg" alt="" />
+          <span>{{ retweeted }}</span>
+        </div>
+        <div class="like" @click="likeClick(likes, sentId)">
+          <img src="../assets/images/MainPage_29.jpg" alt="" v-if="!isLiked" />
+          <img src="../assets/images/liked.png" alt="" v-if="isLiked" />
+          <span>{{ !(likes >= 1000) ? likes : translate(likes) }}</span>
+        </div>
+        <div class="share">
+          <img src="../assets/images/MainPage_31.jpg" alt="" />
+          <span>{{ shared }}</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import FunctionBar from './function-bar.vue';
 export default {
-  components: { FunctionBar },
+  emits: ['like-click'],
   props: [
+    'sentId',
     'type',
     'userAvator',
     'name',
@@ -48,13 +66,20 @@ export default {
     'comments',
     'shared',
   ],
-  provide() {
-    return {
-      retweeted: this.retweeted,
-      likes: this.liked,
-      comments: this.comments,
-      shared: this.shared,
-    };
+  methods: {
+    likeClick() {
+      this.isLiked = !this.isLiked;
+      if (this.isLiked) {
+        this.likes++;
+      } else {
+        this.likes--;
+      }
+    },
+    translate(num) {
+      const num1 = num / 1000;
+      const num2 = (num / 100) % 10;
+      return `${num1},${num2}k`;
+    },
   },
   computed: {
     shortWords() {
@@ -65,7 +90,9 @@ export default {
   },
   data() {
     return {
+      isLiked: false,
       shortWord: this.tag,
+      likes: this.liked,
     };
   },
 };
@@ -106,7 +133,7 @@ export default {
   display: inline-block;
 }
 .users img {
-  width: 3.1875rem;
+  width: 3.1875rem !important;
 }
 .type {
   color: #585f65;
@@ -122,35 +149,54 @@ export default {
   text-decoration: none;
 }
 .content-header {
-  font-size: 10px;
+  font-size: 10px !important;
 }
 .content-header span img {
-  width: 1.25rem;
-  height: 1.125rem;
+  width: 1.25rem !important;
+  height: 1.125rem !important;
 }
 .content {
-  border-top: 1px solid #d5d5d5;
-  padding-bottom: 30px;
-  padding-top: 20px;
+  border-top: 1px solid #d5d5d5 !important;
+  padding-bottom: 30px !important;
+  padding-top: 20px !important;
 }
 .content-header a,
 .general a {
-  color: #676c6f;
-  font-weight: bolder;
-  text-decoration: none;
-  margin-right: 0.125rem;
+  color: #676c6f !important;
+  font-weight: bolder !important;
+  text-decoration: none !important;
+  margin-right: 0.125rem !important;
 }
 .dots {
-  height: 13px;
-  display: inline-block;
-  align-items: center;
-  margin-left: 0.3125rem;
+  height: 13px !important;
+  display: inline-block !important;
+  align-items: center !important;
+  margin-left: 0.3125rem !important;
 }
 .general {
-  height: 0.8125rem;
-  margin-left: 3%;
+  height: 0.8125rem !important;
+  margin-left: 3% !important;
 }
 .name {
-  display: inline-block;
+  display: inline-block !important;
+}
+.function-bar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-around !important;
+  width: 80% !important;
+  position: relative !important;
+  left: 10% !important;
+}
+.function-bar img {
+  width: 1.125rem;
+  height: 1rem;
+}
+.comments,
+.retweeted,
+.like,
+.share {
+  width: 3.25rem !important;
+  height: 1.25rem !important;
 }
 </style>
