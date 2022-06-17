@@ -15,6 +15,7 @@
       :retweeted="user.retweeted"
       :shared="user.shared"
       :comments="user.comments"
+      @like-click.prevent="updateLikes"
     ></text-content>
   </div>
   <bottom-bar></bottom-bar>
@@ -32,6 +33,7 @@ export default {
       users: {
         user1: {
           id: 1,
+          sentId: 202261782451,
           type: 'Video games·',
           avator: 'MainPage_16.jpg',
           name: "Assasin's Creed",
@@ -40,12 +42,13 @@ export default {
           date: '5/19/22',
           photo: 'MainPage_23.jpg',
           liked: 999,
-          retweeted: 99,
+          retweeted: 999,
           shared: 999,
           comments: 999,
         },
         user2: {
           id: 2,
+          sentId: 2022617824533,
           type: 'Video games',
           avator: 'MainPage_16.jpg',
           name: "Assasin's Creed",
@@ -60,6 +63,7 @@ export default {
         },
         user3: {
           id: 2,
+          sentId: 2022617522,
           type: 'Video games',
           avator: 'MainPage_16.jpg',
           name: "Assasin's Creed",
@@ -74,6 +78,7 @@ export default {
         },
         user4: {
           id: 2,
+          sentId: 2022617522,
           type: 'Video games',
           avator: 'MainPage_16.jpg',
           name: "Assasin's Creed",
@@ -97,6 +102,9 @@ export default {
   methods: {
     changeCurrent(current) {
       this.currentPage = current;
+    },
+    updateLikes(likes, id) {
+      this.users.find((user) => user.id == id).liked = likes;
     },
   },
   provide() {
